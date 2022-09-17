@@ -1,20 +1,27 @@
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native'
+import { s } from 'react-native-wind'
+import CityDetails from './Screens/CityDetails';
+import CountryDetails from './Screens/CountryDetails';
+import Home from './Screens/Home';
 
 export default function App() {
+  const Stack = createNativeStackNavigator()
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer >
+      <View style={s`h-full`}>
+        <StatusBar style="auto" />
+        <Stack.Navigator initialRouteName='Screen1'>
+          <Stack.Screen name='Screen1' component={Home} options={{ title: "Home" }} />
+          <Stack.Screen name='Screen2' component={CountryDetails} options={{ title: "Country Details" }} />
+          {/* 
+          //@ts-ignore */}
+          <Stack.Screen name='Screen3' component={CityDetails} options={{ title: "City Details" }} />
+        </Stack.Navigator>
+      </View>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
